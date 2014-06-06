@@ -5,6 +5,7 @@ about tmux.sh
     1.若打开tmux时，不需要执行命令或者脚本，去掉脚本中的`sec`
     2.sec是自动登陆远程服务器的脚本，请根据自己的需要替换。
 
+如有问题，请联系 chaubeau01@gmail.com
 
 
 
