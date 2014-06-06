@@ -1,0 +1,10 @@
+about tmux.conf
+    1.statusbar 中的“set -g status-right '[#(weath) ]'” 表示在tmux的状态栏右下方显示天气，显示天气调用了weath脚本。
+    2.weath脚本依赖jq工具，jq是shell 解析json的工具，如该版本不支持您的机器，请安装最新版，地址：http://stedolan.github.io/jq/
+about tmux.sh
+    1.若打开tmux时，不需要执行命令或者脚本，去掉脚本中的`sec`
+    2.sec是自动登陆远程服务器的脚本，请根据自己的需要替换。
+
+
+
+

@@ -1,0 +1,17 @@
+#/bin/bash
+#chaubeau01@gmai.com
+user_name=
+
+if_login=`ps aux|grep "ssh $user_name@example.com"|grep -v 'grep'|wc -l`
+
+if [ $if_login -gt 0 ]
+then
+    if [ -f ./.login ]
+    then
+	    ./.login 2>/dev/null
+    else
+        bash
+    fi
+else
+	bash
+fi
