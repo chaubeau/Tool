@@ -1,0 +1,16 @@
+Version 1.2.2 (Aug 20; Zhang Le <robert.zhangle@gmail.com>)
+	* src/Makefile: add install -d $(DESTDIR)/usr/bin
+	* src/fortune-zh: add a missing "then"
+		force fortune to run under user customized locale
+
+Version 1.2.1 (Aug 20; Zhang Le <robert.zhangle@gmail.com>)
+	* make fortune-mod-zh monolithic
+	* create src directory, put all sources in it
+	* re-write INSTALL README.utf8, and most importantly Makefile
+	* change file name from zh-* to *
+	* change maozedong to maoyulu, change tao to dao
+	* add maoshici(Thanks to miZZle on #gentoo-cn)
+	* fortune-zh: improve locale detection algorithm
+
+Version 1.2.0 (Aug 20; Zhang Le <robert.zhangle@gmail.com>)
+	* Please check individual ChangeLogs under ChangeLogs directory
