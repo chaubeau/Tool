@@ -1,6 +1,8 @@
-init opensuse
+添加终端欢迎信息，美化PS1
 ---
-run install.sh by root
+
+install
 ---
-#  add welcome banner
-#  update PS1
+
+  su root
+  ./install.sh
