@@ -3,6 +3,10 @@
 
 install
 ---
-
+<pre>
+<code>
   su root
   ./install.sh
+
+</code>
+</pre>
