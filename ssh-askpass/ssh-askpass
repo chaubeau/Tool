@@ -1,0 +1,80 @@
+#!/bin/bash
+
+SESSION=
+
+case "$DESKTOP_SESSION" in
+  kde)       SESSION=kde ;;
+  gnome)     SESSION=gnome ;;
+esac
+
+if [ -z "$SESSION" ] ; then
+  WM="${WINDOWMANAGER##*/}"
+  case "$WM" in
+    *kde*)   SESSION=kde ;;
+    *gnome*) SESSION=gnome ;;
+  esac
+fi
+
+if [ -z "$SESSION" ] ; then
+  if [ -n "$KDE_FULL_SESSION" ] ; then
+    SESSION=kde
+  fi
+  if [ -n "$GNOME_DESKTOP_SESSION_ID" ] ; then
+    SESSION=gnome
+  fi
+fi
+
+
+GNOME_SSH_ASKPASS="/usr/lib/ssh/gnome-ssh-askpass"
+KDE_SSH_ASKPASS="/usr/lib/ssh/ksshaskpass"
+
+function CHECK_STATUS()
+{
+  CONF=$1
+  if [[ -f "$CONF" ]]
+  then
+      STATUS=`grep -i "Enabled" $CONF|head -n 1|awk -F'=' '{print $NF}'|tr [A-Z] [a-z]`
+      if [ $STATUS != "false" ]
+      then
+          STATUS="true"
+      fi
+  else
+      STATUS="true"
+  fi
+
+  echo $STATUS
+}
+
+if [ $SESSION = "kde" ]
+then
+    LOCAL_CONFIG="$HOME/.kde4/share/config/ssh-askpassrc"
+    ASK_STU=`CHECK_STATUS $LOCAL_CONFIG`
+elif [ $SESSION = "gnome" ]
+then
+    LOCAL_CONFIG="$HOME/.local/share/ssh-askpass/ssh-askpassrc"
+    ASK_STU=`CHECK_STATUS $LOCAL_CONFIG`
+else
+    ASK_STU="false"
+fi
+
+if [ $ASK_STU = "true" ]
+then
+  case "$SESSION" in
+    gnome)
+        if [ -f $GNOME_SSH_ASKPASS ]; then
+          exec $GNOME_SSH_ASKPASS ${1+"$@"}
+        else
+          exec $X11_SSH_ASKPASS ${1+"$@"}
+        fi
+     ;;
+     kde)
+         if [ -f $KDE_SSH_ASKPASS ]; then
+             exec $KDE_SSH_ASKPASS ${1+"$@"}
+         else
+             exec $X11_SSH_ASKPASS ${1+"$@"}
+         fi
+      ;;
+    esac
+else
+    exec ${1+"$@"} 2>/dev/null
+fi
