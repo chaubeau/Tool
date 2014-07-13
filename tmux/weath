@@ -1,8 +1,12 @@
 #!/bin/bash
 #by chaubeau01@gmail.com
 
-city_code="101010100"  #beijing,根据需要去www.weather.com.cn 查询相关橙色的code
-curl -s http://www.weather.com.cn/data/cityinfo/${city_code}.html >.we_tmp
+city_code="101010100"  #beijing,根据需要去www.weather.com.cn 查询相关城市的code
+curl --connect-timeout 2 -m 1  -s http://www.weather.com.cn/data/cityinfo/${city_code}.html  1>/tmp/we_tmp 2>/dev/null
 
+function get_weather()
+{
+    cat /tmp/we_tmp|./jq '.weatherinfo.weather,.weatherinfo.temp1,.weatherinfo.temp2'|sed 's/\"//'|sed 's/\"//'|sed ':a;N;s/\n/ /;ta'|awk '{printf("%s %s  \342\224\200 %s\n",$1,$3,$2)}' 2>/dev/null 
+}
 
-cat ./.we_tmp|./jq '.weatherinfo.weather,.weatherinfo.temp1,.weatherinfo.temp2'|sed 's/\"//'|sed 's/\"//'|sed ':a;N;s/\n/ /;ta'|awk '{printf("%s %s-%s\n",$1,$3,$2)}'
+get_weather
