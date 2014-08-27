@@ -1,0 +1,2 @@
+content     date_tb    chrome/content/
+overlay chrome://messenger/content/messenger.xul chrome://date_tb/content/date_tb.xul
