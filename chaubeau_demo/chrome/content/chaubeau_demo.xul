@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<overlay id="chaubeau"
+xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/javascript" src="chrome://chaubeau_demo/content/chaubeau_demo.js"/>
+ <statusbar id="status-bar">
+     <statusbarpanel id="my-panel" label="Date"/>
+ </statusbar>
+</overlay>

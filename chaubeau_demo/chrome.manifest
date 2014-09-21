@@ -1,0 +1,2 @@
+content     chaubeau_demo    chrome/content/
+overlay chrome://messenger/content/messenger.xul chrome://chaubeau_demo/content/chaubeau_demo.xul

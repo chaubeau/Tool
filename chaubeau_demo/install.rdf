@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>chaubeau_demo@chaubeau.github.io</em:id>
+    <em:name>Demo on Thunderbird</em:name>
+    <em:version>0.1</em:version>
+    <em:creator>Chaubeau</em:creator>
+    <em:homepageURL>https://github.com/chaubeau/Tool/tree/master/chaubeau_demo</em:homepageURL>
+     <em:description>关于Thunderbird附件组件的演示,本组件实现了两个简单的演示功能:
+
+         1.在statusbar 添加了一个时间标签,每一分钟刷新一次.
+
+         2.每个半小时弹窗一次,提醒用户注意休息,类似于小闹钟.
+
+         本组件旨在演示Thunderbird附件组件的开发流程.</em:description>
+    <em:targetApplication>
+      <Description>
+        <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+        <em:minVersion>28.0</em:minVersion>
+        <em:maxVersion>36.0.*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
+  </Description>
+</RDF>
