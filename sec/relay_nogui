@@ -1,0 +1,51 @@
+#!/bin/bash
+#by chaubeau01@gmail.com
+pin=
+user_name=
+password=
+#输入token的长度
+length=6
+
+read -p "请输入PIN码:"
+
+token=$REPLY
+
+if [  ! `echo $token|wc -L` -eq $length ]
+then
+    echo "请输入正确的TOKEN"
+    exit 1
+fi
+if ! echo $token| grep '[0-9]\{6\}'
+then
+
+    echo  "您的输入包含非法字符"
+    exit 1
+fi
+
+cat >.login<<EOF
+#!/usr/bin/expect -f
+trap {
+   set rows [stty rows]
+   set cols [stty columns] 
+   stty rows \$rows columns \$cols < \$spawn_out(slave,name)
+} WINCH
+
+set timeout 10
+set pin [lindex \$argv 1]
+set token [lindex \$argv 0]
+
+spawn ssh $user_name@example.com
+#expect  "*Enter PASSCODE:" {
+expect  "*example.com's password:" {
+send "\$pin\$token\n" }
+expect "*example str" {
+send "ssh $user_name@example.com\n" }
+expect "*password*" {
+send "$password\n" }
+expect "*$user_name@example.com*"
+send "sudo -iu work\n"
+expect -re "$"
+interact
+EOF
+chmod 755 .login
+./.login $token $pin 2>/dev/null 
